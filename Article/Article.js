@@ -85,6 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Yar Pirate Ipsum',
+    date: 'Aug 6th, 2019',
+    firstParagraph: `Pieces of Eight jury mast aye bowsprit draft barque no prey, no pay draught prow sutler. Plate Fleet jury mast barque cable scallywag mizzenmast haul wind heave to cutlass broadside. Gold Road brigantine ye bowsprit Davy Jones' Locker starboard reef sails yo-ho-ho Spanish Main rum. `,
+
+    secondParagraph: `Spirits swing the lead yo-ho-ho reef belaying pin bowsprit Yellow Jack matey shrouds scurvy. Keelhaul topmast Spanish Main bilge rat fore jury mast grog blossom stern Sail ho cable. Landlubber or just lubber pirate quarterdeck gibbet driver bilge water code of conduct line prow belay. `,
+
+    thirdParagraph: `Rope's end bounty man-of-war Shiver me timbers wherry scourge of the seven seas aye me topgallant Sink me. Yo-ho-ho capstan weigh anchor hearties hogshead quarterdeck killick mutiny clap of thunder galleon. Shiver me timbers topsail spyglass matey gally pirate rope's end avast Nelsons folly gunwalls.`
+  },
+  {
+    title: 'Cupcake Ipsum',
+    date: 'Aug 10th, 2019',
+    firstParagraph: `Brownie bear claw candy canes topping liquorice. Tiramisu gingerbread cookie brownie. Jelly beans tart sweet roll gummies brownie danish. Muffin sugar plum cheesecake carrot cake candy canes. Croissant marzipan chocolate. Cake marshmallow marzipan caramels. Toffee brownie tootsie roll wafer candy canes muffin gingerbread cheesecake. Jujubes oat cake fruitcake topping. Tart pie sweet roll. Pie fruitcake carrot cake macaroon pudding pastry biscuit tart. Sweet sweet roll pudding sugar plum jujubes gummi bears. Chocolate sugar plum gummi bears.`,
+
+    secondParagraph: `Sugar plum gingerbread lollipop halvah. Cake candy toffee donut donut jelly-o chupa chups. Toffee jelly-o dragée tart pie sweet roll. Danish lollipop fruitcake chocolate cake. Gummi bears topping gingerbread danish muffin dessert ice cream lollipop. Marzipan sugar plum caramels danish jujubes sesame snaps. Caramels icing biscuit fruitcake pudding. Sugar plum danish muffin. Caramels pie croissant danish biscuit croissant biscuit jelly beans. Tootsie roll tiramisu jelly beans jujubes pastry lollipop. Pastry icing ice cream cupcake jelly-o. Toffee candy cotton candy macaroon oat cake macaroon gummies bear claw.`,
+
+    thirdParagraph: `Jujubes sesame snaps ice cream macaroon brownie candy cookie lollipop. Candy canes jelly-o sesame snaps biscuit caramels dragée muffin brownie biscuit. Chocolate bar jelly beans biscuit. Chocolate pudding cookie. Cake donut jujubes. Macaroon lollipop topping. Wafer biscuit candy canes marzipan lemon drops. Cotton candy sesame snaps toffee brownie oat cake halvah gingerbread. Halvah croissant ice cream muffin candy canes icing dessert biscuit croissant. Caramels jelly beans cheesecake carrot cake lollipop pudding biscuit sweet roll. Jelly-o tootsie roll tart jelly gummi bears halvah tiramisu halvah. Candy canes marshmallow candy gummies.`
   }
 ];
 
@@ -101,14 +119,68 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+const article = document.querySelector('.articles');
+
+data.forEach(x => {
+  article.appendChild(createArticle(x.title, x.date, x.firstParagraph, x.secondParagraph, x.thirdParagraph))
+});
+
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+
+  //defining the elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('date');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const button = document.createElement('span');
+
+  //set structure
+
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(paragraphOne);
+  article.appendChild(paragraphTwo);
+  article.appendChild(paragraphThree);
+  article.appendChild(button);
+
+  //set class names
+  article.classList.add('article');
+  articleTitle.classList.add('h2');
+  articleDate.classList.add('date');
+  paragraphOne.classList.add('firstParagraph');
+  paragraphTwo.classList.add('secondParagraph');
+  paragraphThree.classList.add('thirdParagraph');
+  button.classList.add('expandButton');
+
+  //set text content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  paragraphOne.textContent = firstParagraph;
+  paragraphTwo.textContent = secondParagraph;
+  paragraphThree.textContent = thirdParagraph;
+  button.textContent = "Click to Expand";
+
+  button.addEventListener("click", () =>{
+    article.classList.toggle('article-open');
+  })
+  
+  return article;
+
+}
+
+article.appendChild(createArticle(`This is not the article you are looking for`, `Aug 15th, 2019`, 'p1 is the best paragraph', `p2 is the second worst paragraph`, `p3 is just right`));
+
